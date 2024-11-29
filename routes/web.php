@@ -16,7 +16,8 @@ use App\Http\Controllers\{
     StockMController,
     StockSController,
     ReportController,
-    ReportMController
+    ReportMController,
+    KategoriController
 };
 use App\Exports\ProductExport;
 use App\Imports\ProductImport;
@@ -57,10 +58,11 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'role:Admin'])->grou
     Route::delete('/product/attribute/{id}', [ProductController::class, 'destroy'])->name('product.attribute.destroy');
     Route::get('/stock/index', [StockTransactionController::class, 'index'])->name('stock.index');
     Route::get('/supplier/index', [SupplierController::class, 'index'])->name('supplier.index');
+    Route::get('/user', [UserController::class, 'store'])->name('user.store');
     Route::get('/user/index', [UserController::class, 'index'])->name('user.index');
     Route::get('/user/create', [UserController::class, 'create'])->name('user.create');
     Route::get('/user/{id}/edit', [UserController::class, 'edit'])->name('user.edit');
-    Route::put('/user/{id}/update', [UserController::class, 'update'])->name('user.update');
+    Route::put('/user/{user}/update', [UserController::class, 'update'])->name('user.update');
     Route::delete('/user/{id}/destroy', [UserController::class, 'destroy'])->name('user.destroy');
     Route::get('/setting/index', [SettingController::class, 'index'])->name('setting.index');
     Route::get('/report/index', [ReportController::class, 'index'])->name('report.index');
@@ -89,6 +91,12 @@ Route::prefix('manajergudang')->name('manajergudang.')->middleware(['auth', 'rol
     Route::get('/product/{id}/edit', [ProductMController::class, 'edit'])->name('product.edit');
     Route::put('/product/{id}/update', [ProductMController::class, 'update'])->name('product.update');
     Route::delete('product/{id}', [ProductMController::class, 'destroy'])->name('product.destroy');
+    Route::get('/kategori/index', [KategoriController::class, 'index'])->name('kategori.index');
+    Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
+    Route::get('/kategori/{id}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
+    Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
+    Route::put('/kategori/{id}/update', [KategoriController::class, 'update'])->name('kategori.update');
+    Route::delete('kategori/{id}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
     Route::get('/stock/index', [StockMController::class, 'index'])->name('stock.index');
     Route::put('/stock/update-status/{transactionId}', [StockMController::class, 'updateStatus'])->name('stock.updateStatus');
     Route::get('/supplier/index', [ManajerGudangController::class, 'supplier'])->name('supplier.index');
@@ -122,8 +130,8 @@ Route::prefix('staffgudang')->name('staffgudang.')->middleware(['auth', 'role:St
 // Product and Supplier Resource Routes
 Route::resource('product', ProductController::class);
 Route::resource('product', ProductMController::class);
-Route::resource('suppliers', SupplierController::class);
-Route::resource('users', UserController::class);
+Route::resource('supplier', SupplierController::class);
+Route::resource('user', UserController::class);
 Route::resource('product.attribut', ProductAttributeController::class);
 
 // General setting route
@@ -134,3 +142,4 @@ Route::prefix('staffgudang/stock')->middleware(['auth', 'role:Staff Gudang'])->g
     Route::put('/stock/{id}/update-status', [StockSController::class, 'updateStatus'])->name('staffgudang.stock.updateStatus');
     Route::post('/stock/{id}/check', [StockSController::class, 'markAsChecked'])->name('stock.check');
 });
+

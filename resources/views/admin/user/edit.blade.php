@@ -3,7 +3,7 @@
 @section('content')
     <h1 class="text-2xl font-bold mb-4">Edit User</h1>
 
-    <form action="{{ route('users.update', $user) }}" method="POST" class="space-y-4">
+    <form action="{{ route('admin.user.update', $user->id) }}" method="POST" class="space-y-4">
         @csrf
         @method('PUT')
 
@@ -32,7 +32,8 @@
             <select name="role" id="role"
                 class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
                 @foreach ($roles as $role)
-                    <option value="{{ $role }}" {{ $user->role == $role ? 'selected' : '' }}>{{ ucfirst($role) }}
+                    <option value="{{ $role }}" {{ old('role', $user->role) == $role ? 'selected' : '' }}>
+                        {{ ucfirst($role) }}
                     </option>
                 @endforeach
             </select>
@@ -41,22 +42,6 @@
             @enderror
         </div>
 
-        <div>
-            <label for="password" class="block text-sm font-medium text-gray-700">Password (Kosongkan jika tidak ingin
-                mengubah)</label>
-            <input type="password" name="password" id="password"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-            @error('password')
-                <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
-            @enderror
-        </div>
-
-        <div>
-            <label for="password_confirmation" class="block text-sm font-medium text-gray-700">Konfirmasi Password</label>
-            <input type="password" name="password_confirmation" id="password_confirmation"
-                class="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-blue-500 focus:ring-blue-500">
-        </div>
-
-        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Perbarui</button>
+        <button type="submit" class="px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">Simpan</button>
     </form>
 @endsection

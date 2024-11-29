@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\ProductAttribute;
 use App\Models\Product;
-use App\Models\Kategori;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller

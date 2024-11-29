@@ -27,8 +27,13 @@
 
         <!-- Tombol Import/Export -->
         <div class="mb-4 flex space-x-2">
+            <!-- Tombol untuk tambah produk -->
             <a href="{{ route('manajergudang.product.create') }}"
                 class="inline-block bg-indigo-600 text-white font-semibold py-2 px-4 rounded hover:bg-blue-600">Tambah Data Produk</a>
+
+            <!-- Tombol untuk CRUD kategori -->
+            <a href="{{ route('manajergudang.kategori.create') }}"
+                class="inline-block bg-green-600 text-white font-semibold py-2 px-4 rounded hover:bg-green-700">CRUD Kategori Produk</a>
         </div>
 
         <div class="overflow-x-auto">

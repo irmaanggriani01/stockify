@@ -161,7 +161,7 @@ class AdminController extends Controller
         $validatedData = $request->validate([
             'name' => 'required|string|max:255',
             'sku' => 'required|string|max:255',
-            'category_id' => 'required|exists:kategoris,id',
+            'category_id' => 'required|exists:categories,id',
             'description' => 'required|string',
             'purchase_price' => 'required|numeric',
             'selling_price' => 'required|numeric',
